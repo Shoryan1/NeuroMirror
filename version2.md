@@ -115,6 +115,134 @@ Automatically activated when detected emotion is:
 
 ---
 
+## 🔁 User Experience Flow (Mirror Display Logic)
+
+### 📸 Step 1: Detect User Presence
+
+* Camera identifies a face in front of the mirror.
+* Initiates a **smooth animation** UI transition.
+* Displays mood result using DeepFace analysis:
+
+  * Emoji + Mood Label (e.g., 😊 Happy, 😢 Sad, 😠 Angry)
+  * Stylish background matching emotion
+  * Subtle animation like emoji bounce or glow
+
+### 🎭 Step 2: Mood-Based Display Panel
+
+* After 2–3 seconds of mood recognition:
+
+```
++---------------------------------------------------+
+|    🕒 12:42 PM    ☁️ 32°C       😢 Sad             |
+|                                                   |
+|     "You seem down today. Let’s take a deep       |
+|       breath together..."                         |
+|                                                   |
+|     🧘 [  Breathing Circle Animation  ]            |
+|                                                   |
+|     🎵 Now Playing: Calm Rain Sounds               |
+|                                                   |
++---------------------------------------------------+
+```
+
+* Accompanied by:
+
+  * Background music
+  * Voice assistant via `pyttsx3`
+
+### 🌿 Step 3: Wellness Mode (Automatic Trigger)
+
+* If emotion is **Sad**, **Angry**, **Fear**, or **Disgust**:
+
+  * Auto-starts wellness sequence:
+
+    * Breathing guide
+    * Calming music
+    * Text + voice motivation
+  * Mood and timestamp stored in SQLite
+
+### ✋ Step 4: Gesture-Based Navigation
+
+ **Gesture Detection** using OpenCV:
+
+* Left hand swiping right (👈👉) → Open Skin Health Panel
+
+* Hand raised upward ✋⬆️ → Open Confidence Builder Panel
+
+
+  * Detected via motion tracking or contour difference
+
+* If detected, UI transitions to:
+
+  * **Skin Health Detection Panel**
+  * Shows analysis result with:
+
+    * Image overlay (acne/redness area)
+    * Skin condition tip
+    * Option to return to main screen via right hand swiping left
+
+---
+
+## 💡 Skin Health Detection Flow (Trigger via Gesture)
+
+* Camera re-captures image focused on skin
+* Detects:
+
+  * Acne
+  * Redness
+  * Dry skin
+* Display:
+
+```
++---------------------------------------------------+
+|      🧴 Skin Analysis:                             |
+|                                                   |
+|  ✔️ Mild acne detected.                           |
+|  ✔️ Redness on left cheek.                        |
+|                                                   |
+|  💡 Tip: Cleanse face with gentle soap daily.     |
++---------------------------------------------------+
+```
+
+* Logged to SQLite + Flask dashboard
+
+---
+## 💪 Confidence Builder Panel (Trigger: Hand Raised Up ✋⬆️)
+
+**🎯 Purpose:**
+
+*To boost the user's confidence using speech, positive affirmations, and interactive exercises.
+### 🌟 Features:
+
+*🎤 Voice playback: "You are capable, strong, and valuable."
+
+*🪞 Mirror text animation: "You’ve overcome more than you think."
+
+*📋 Interactive confidence tasks (e.g., Say aloud: “I believe in myself.”)
+
+*📈 Progress Tracker (e.g., "Streak: 3 Days of Confidence Work")
+
+**🧠 Suggested UI:**
+```
++---------------------------------------------------+
+|        💪 Confidence Builder                      |
+|                                                   |
+|   "You are brave. You are focused. You are        |
+|    becoming your best self."                      |
+|                                                   |
+|   🗣️ Say this out loud with me:                   |
+|   "I am ready to shine!"                          |
+|                                                   |
+|   🔁 [ Next Motivation ]    🔙 [ Back ]             |
++---------------------------------------------------+
+```
+
+*Encourages eye contact and vocal participation
+
+*Logged as a confidence session in SQLite (optional)
+
+
+
 ## 🌐 Flask Web Dashboard
 
 **URL:** `http://localhost:5000`
